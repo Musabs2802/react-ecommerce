@@ -1,4 +1,5 @@
 import { FooterBanner, HeroBanner } from '../components'
+import Product from '../components/Product'
 import { client } from '../lib/client'
 
 const index = ({ products, banners }) => {
@@ -6,12 +7,15 @@ const index = ({ products, banners }) => {
     <>
       <HeroBanner data={banners.length > 0 && banners[0]} />
 
-      <div>
+      <div className='products-heading'>
         <h2>Best Selling Products</h2>
-        <p>Speakers of many variations</p>
       </div>
 
-      <div>{products?.map((p) => p.name)}</div>
+      <div className='products-container'>
+        {products?.map((p) => (
+          <Product key={p._id} data={p} />
+        ))}
+      </div>
 
       <FooterBanner />
     </>

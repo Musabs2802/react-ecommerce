@@ -1,4 +1,4 @@
-import { FooterBanner, HeroBanner } from '../components'
+import { Footer, FooterBanner, HeroBanner } from '../components'
 import Product from '../components/Product'
 import { client } from '../lib/client'
 
@@ -17,7 +17,7 @@ const index = ({ products, banners }) => {
         ))}
       </div>
 
-      <FooterBanner />
+      <FooterBanner data={banners.length > 1 && banners[1]} />
     </>
   )
 }

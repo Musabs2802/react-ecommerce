@@ -32,10 +32,28 @@ export const StateContext = ({ children }) => {
     setQty(1)
   }
 
+  const onRemove = (item) => {
+    setCart((prevCart) => prevCart.filter((pc) => pc._id != item._id))
+  }
+
+  const toggleCartItemQty = (item, newQty) => {
+    if (newQty > 0) {
+      setCart((prevCart) =>
+        prevCart.map((c) => {
+          if (c._id == item._id) {
+            return {
+              ...c,
+              quantity: newQty,
+            }
+          } else return c
+        })
+      )
+    }
+  }
+
   const incQty = () => setQty((prev) => prev + 1)
 
   const decQty = () => {
-    console.log('dec')
     setQty((prev) => {
       if (prev - 1 < 1) return 1
       return prev - 1
@@ -46,11 +64,14 @@ export const StateContext = ({ children }) => {
     <Context.Provider
       value={{
         getShowCart,
+        setShowCart,
         getCart,
         getQty,
         incQty,
         decQty,
         onAdd,
+        onRemove,
+        toggleCartItemQty,
       }}
     >
       {children}
